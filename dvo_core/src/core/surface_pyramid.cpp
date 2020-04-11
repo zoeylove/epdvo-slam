@@ -22,6 +22,7 @@
 
 #include <iostream>
 #include <limits>
+
 namespace dvo
 {
 namespace core

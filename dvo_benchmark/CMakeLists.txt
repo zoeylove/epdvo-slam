@@ -2,15 +2,12 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(dvo_benchmark)
 
+set(BUILD_SHARED_LIBS OFF)
+
 LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
-
-find_package(catkin REQUIRED COMPONENTS roscpp dvo_core dvo_ros dvo_slam cv_bridge)
+set( CMAKE_CXX_FLAGS "-std=c++11")
+find_package(catkin REQUIRED COMPONENTS roscpp dvo_core dvo_ros dvo_slam)
 find_package(cmake_modules REQUIRED)
-find_package(Eigen3 REQUIRED)
-find_package(G2O REQUIRED)
-#find_package(OpenCV REQUIRED)
-
-LIST(APPEND CMAKE_CXX_FLAGS "-std=c++11")
 
 catkin_package(
   INCLUDE_DIRS include
@@ -20,8 +17,6 @@ catkin_package(
 include_directories(
   "include"
   ${catkin_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIRS}
-  ${G2O_INCLUDE_DIR}
 )
 
 
@@ -32,7 +27,7 @@ add_executable(benchmark
 #add_executable(experiment
 #     src/experiment.cpp
 #)
-message(STATUS ${catkin_LIBRARIES})
+
 target_link_libraries(benchmark
 #  vtkCommon
   ${catkin_LIBRARIES}

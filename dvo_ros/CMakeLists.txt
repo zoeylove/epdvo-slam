@@ -2,34 +2,24 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(dvo_ros)
 
+set(BUILD_SHARED_LIBS OFF)
+set( CMAKE_CXX_FLAGS "-std=c++11")
 find_package(catkin REQUIRED COMPONENTS roscpp tf tf_conversions eigen_conversions dynamic_reconfigure dvo_core sensor_msgs image_transport message_filters cv_bridge visualization_msgs interactive_markers pcl_ros)
 find_package(cmake_modules REQUIRED)
-find_package(PCL REQUIRED COMPONENTS common)
-find_package(Eigen3 REQUIRED)
-#find_package(sophus REQUIRED)
-#find_package(Boost REQUIRED thread)
-#find_package(OpenCV 3 REQUIRED)
-#find_package(TBB REQUIRED)
- 
+
 # dynamic reconfigure
 generate_dynamic_reconfigure_options(cfg/CameraDenseTracker.cfg)
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES dvo_ros
-  DEPENDS PCL
 )
 
 include_directories(
   "include"
-  ${dvo_ros_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIRS}
-  ${PCL_INCLUDE_DIRS}
 )
 
-message(STATUS "hello my dear ${catkin_LIBRARIES}")
 
 add_library(${PROJECT_NAME} 
     src/camera_base.cpp

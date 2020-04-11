@@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 2.8.3)
 
 project(dvo_core)
 
-find_package(catkin REQUIRED COMPONENTS cv_bridge)
+set(BUILD_SHARED_LIBS OFF)
+
+find_package(catkin REQUIRED)
 find_package(cmake_modules REQUIRED)
-find_package(PCL REQUIRED COMPONENTS common filters)
 find_package(Eigen3 REQUIRED)
 find_package(sophus REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
-#find_package(OpenCV 3 REQUIRED)
+find_package(OpenCV REQUIRED)
 find_package(TBB REQUIRED)
+find_package(PCL REQUIRED COMPONENTS common filters)
 
 catkin_package(
   INCLUDE_DIRS include
@@ -17,6 +19,7 @@ catkin_package(
   DEPENDS OpenCV PCL
 )
 
+set( CMAKE_CXX_FLAGS "-std=c++11")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse -msse2 -msse3 -msse4 -ftree-vectorize")
 
 include_directories(
@@ -26,6 +29,7 @@ include_directories(
   ${EIGEN3_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
   ${PCL_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 add_library(dvo_core 
@@ -49,10 +53,10 @@ add_library(dvo_core
 )
 
 target_link_libraries(dvo_core 
+    ${PCL_LIBRARIES}
+    ${OpenCV_LIBRARIES}
     tbb
     boost_thread 
-    ${PCL_LIBRARIES}
-    ${catkin_LIBRARIES}
 )
 
 add_library(dvo_visualization
