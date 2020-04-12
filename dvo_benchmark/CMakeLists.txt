@@ -6,12 +6,14 @@ set(BUILD_SHARED_LIBS OFF)
 
 LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
 set( CMAKE_CXX_FLAGS "-std=c++11")
-find_package(catkin REQUIRED COMPONENTS roscpp dvo_core dvo_ros dvo_slam)
+find_package(catkin REQUIRED COMPONENTS roscpp dvo_core dvo_ros dvo_slam edge_direct_vo)
 find_package(cmake_modules REQUIRED)
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES dvo_benchmark
+  CATKIN_DEPENDS
+     edge_direct_vo
 )
 
 include_directories(
@@ -31,6 +33,7 @@ add_executable(benchmark
 target_link_libraries(benchmark
 #  vtkCommon
   ${catkin_LIBRARIES}
+  edge_direct_vo
 )
 
 # create output directory - just convenience for our users

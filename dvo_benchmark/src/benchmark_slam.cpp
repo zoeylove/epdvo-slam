@@ -57,7 +57,7 @@ dvo::core::RgbdImagePyramidPtr load(dvo::core::RgbdCameraPyramid& camera, std::s
   {
     if(rgb.type() == CV_8UC3)
     {
-      cv::cvtColor(rgb, grey, CV_BGR2GRAY);
+      cv::cvtColor(rgb, grey,cv::COLOR_RGB2GRAY);
       rgb_available = true;
     }
     else

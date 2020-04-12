@@ -6,7 +6,7 @@ set(BUILD_SHARED_LIBS OFF)
 
 LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
 set( CMAKE_CXX_FLAGS "-std=c++11")
-find_package(catkin REQUIRED COMPONENTS roscpp dynamic_reconfigure dvo_core dvo_ros sensor_msgs image_transport message_filters cv_bridge visualization_msgs interactive_markers)
+find_package(catkin REQUIRED COMPONENTS roscpp dynamic_reconfigure dvo_core dvo_ros sensor_msgs image_transport message_filters cv_bridge visualization_msgs interactive_markers edge_direct_vo)
 find_package(cmake_modules REQUIRED)
 find_package(G2O REQUIRED)
 find_package(SuiteSparse REQUIRED)
@@ -24,6 +24,7 @@ generate_dynamic_reconfigure_options(cfg/GraphVisualizer.cfg cfg/KeyframeSlam.cf
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES dvo_slam
+  LIBRARIES edge_direct_vo
   DEPENDS G2O
 )
 
@@ -88,6 +89,7 @@ g2o_stuff
 g2o_core
 
 ${OPENGL_LIBRARIES}
+edge_direct_vo
 )
 
 #add_executable(camera_keyframe_tracker

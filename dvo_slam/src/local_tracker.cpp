@@ -29,6 +29,7 @@
 #include <tbb/tbb_thread.h>
 
 #include <ros/console.h>
+#include <edge_direct_vo/Pose.h>
 
 namespace dvo_slam
 {
@@ -131,7 +132,10 @@ void LocalTracker::initNewLocalMap(const dvo::core::RgbdImagePyramid::Ptr& keyfr
 
   TrackingResult r_odometry;
   r_odometry.Transformation.setIdentity();
-
+  /*
+  这个地方把自己的函数来替代这个match，主要是把这个自己的写的函数加入到这个DenseTracker类中
+  注意传入的数据类型，需要更改，改成keyframe and frame,对应输出的odometry类型也需要check 看是否和edge中一致
+  */
   impl_->odometry_tracker_->match(*(impl_->keyframe_points_), *frame, r_odometry);
   impl_->last_keyframe_pose_ = r_odometry.Transformation;
 

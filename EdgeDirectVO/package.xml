@@ -1,0 +1,18 @@
+<package>
+  <name>edge_direct_vo</name>
+  <version>0.1.0</version>
+  <description>
+    edge_direct_vo
+  </description>
+  <maintainer email="christian.kerl@in.tum.de">Christian Kerl</maintainer>
+  <license>GPL</license>
+
+  <url>https://github.com/tum-vision/dvo_slam</url>
+  <author>Christian Kerl</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+   <build_depend>roscpp</build_depend>
+  <run_depend>roscpp</run_depend>
+
+</package>
